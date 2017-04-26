@@ -137,3 +137,4 @@ int cmp(const void * a,const void * b)
 
 DFS深度优先搜索
 这道题是仿造最大黑区域的，本质上还是找到黑区域的面积，区别是一个是输出最大的，这道题要求的是次大的。
+附：原最大黑区域题目解析：http://blog.csdn.net/bao_libra/article/details/45154387
