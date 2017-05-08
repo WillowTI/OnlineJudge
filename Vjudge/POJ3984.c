@@ -1,4 +1,3 @@
-POJ-3984 迷宫问题
 Description
 
 定义一个二维数组：
