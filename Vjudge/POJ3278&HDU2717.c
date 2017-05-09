@@ -23,7 +23,6 @@ Hint
 
 The fastest way for Farmer John to reach the fugitive cow is to move along the following path: 5-10-9-18-17, which takes 4 minutes.
 
-//尚未完成注释
 
 
 
@@ -35,7 +34,7 @@ The fastest way for Farmer John to reach the fugitive cow is to move along the f
 #include <math.h>
 #include <ctype.h>
 
-const int N = 100100;//我也不知道为什么要开那么大，但是如果只开到100100就RunTimeError了，明天问问别人
+const int N = 100100;
 int n,k;
 typedef struct
 {
@@ -43,7 +42,7 @@ typedef struct
     int step;
 }node;
 
-node Q[200100];
+node Q[200100];//数组开到20w是为了防止RunTimeError，因为head和tail递增访问的时候可能会越界
 int vis[200100]={0};
 int head=0;
 int tail=1;
