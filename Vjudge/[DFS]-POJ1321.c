@@ -15,7 +15,7 @@ void DFS(int i)
     }
     if(i>=n)
         return ;
-    for(int j=0;j<n;j++)
+    for(int j=0;j<n;j++)//以i行为起始搜索
         if(!place[j] && board[i][j]=='#')
         {
             place[j]=1;
@@ -24,7 +24,7 @@ void DFS(int i)
             place[j]=0;
             num--;
         }
-    DFS(i+1);   //搜索下一行，递归的结果是搜索下面所有行
+    DFS(i+1);   //搜索i+1行
 }
 
 int main()
