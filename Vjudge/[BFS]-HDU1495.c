@@ -30,7 +30,7 @@ NO
 5.M->S
 6.M->N
 注意不能溢出
-
+判定平分：只要当有两个杯子的可乐体积一样时即为平分
 
 #include <stdio.h>
 #include <string.h>
