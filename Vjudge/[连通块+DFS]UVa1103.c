@@ -31,45 +31,45 @@ int cmp(const void * a,const void * b);
 
 int main()
 {
-		int cas=1;
-		while (1)
+	int cas=1;
+	while (1)
+	{
+		scanf("%d%d",&h,&w);
+
+		if (h==0&&w==0) break;
+
+		memset(bin,0,sizeof(bin));//初始化
+		memset(ans,0,sizeof(ans));
+		length=0;
+
+		for (int i=0;i<h;i++)
 		{
-			scanf("%d%d",&h,&w);
+		    scanf("%s",hex[i]);
+		}
 
-			if (h==0&&w==0) break;
+		hex2bin();
 
-            memset(bin,0,sizeof(bin));//初始化
-            memset(ans,0,sizeof(ans));
-            length=0;
+		h+=2;
+		w*=4;
+		w+=2;
 
-			for (int i=0;i<h;i++)
+		dfs1(0,0,2);//把外层0染成2
+
+		for (int i=0;i<h;i++)
+		    for (int j=0;j<w;j++)
+		       if (bin[i][j]==1)//当遇到一个字符
 			{
-				scanf("%s",hex[i]);
+			    cnt=0;
+			    dfs2(i,j,3);//把1染成3
+			    ans[length++]=seq[cnt];
 			}
 
-			hex2bin();
+		    printf("Case %d: ",cas);
+		    cas++;
+		    qsort(ans,length,sizeof(char),cmp);
+		    puts(ans);
 
-			h+=2;
-			w*=4;
-			w+=2;
-
-			dfs1(0,0,2);//把外层0染成2
-
-			for (int i=0;i<h;i++)
-                for (int j=0;j<w;j++)
-                    if (bin[i][j]==1)//当遇到一个字符
-                    {
-                        cnt=0;
-                        dfs2(i,j,3);//把1染成3
-                        ans[length++]=seq[cnt];
-                    }
-
-            printf("Case %d: ",cas);
-            cas++;
-            qsort(ans,length,sizeof(char),cmp);
-            puts(ans);
-
-		}
+	}
 
     return 0;
 }
