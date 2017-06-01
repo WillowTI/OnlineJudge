@@ -4,15 +4,15 @@
 #include <ctype.h>
 
 int h,w,cnt,bin[205][55*8]={{0}};
-const int dirx[1][4]={-1,0,0,1};
-const int diry[1][4]={0,1,-1,0};
+const int dirx[4]={-1,0,0,1};
+const int diry[4]={0,1,-1,0};
 char hex[205][55]={{0}};
 char ans[100000]={0};
 const char seq[10]="WAKJSD";
 const char hexnum[16][6]={"0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011","1100","1101","1110","1111"};
 void hex2bin();
-void dfs(int x,int y,int val);
 void dfs1(int x,int y,int val);
+void dfs2(int x,int y,int val);
 int valid(int x,int y);
 
 
@@ -27,6 +27,10 @@ int main()
 
 			if (h==0&&w==0) break;
 
+			memset(bin,0,sizeof(bin));
+			memset(hex,0,sizeof(hex));
+
+
 			for (int i=0;i<h;i++)
 			{
 				scanf("%s",hex[i]);
@@ -36,6 +40,8 @@ int main()
 			h+=2;
 			w*=4;
 			w+=2;
+
+			dfs1(0,0,2);
 
 			for (int i=0;i<h;i++)
 			{
@@ -68,4 +74,21 @@ void hex2bin()
 				bin[binx][biny++]=hexnum[num][k]-'0';
 		}
 	}
+}
+
+void dfs1(int x, int y, int val)
+{
+	int ori=bin[x][y];
+	bin[x][y]=val;
+	for (int i=0;i<4;i++)
+	{
+		int nx=x+dirx[i];
+		int ny=y+diry[i];
+		if (valid(nx,ny)&&bin[nx][ny]==ori) dfs1(nx,ny,val);
+	}
+}
+
+int valid(int x, int y)
+{
+	return (x>=0&&x<h&&y>=0&&y<w);
 }
