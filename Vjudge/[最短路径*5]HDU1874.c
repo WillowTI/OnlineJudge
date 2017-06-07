@@ -163,15 +163,15 @@ int main()
 
 void Dijkstra(int s,int e)
 {
-    int i,j,min,pos;
+    int min,pos;
     memset(vis,0,sizeof(vis));
     cast[s] = 0;//从s到s一定是0
     vis[s] = 1;//把s标记为已访问
-    for(i = 0;i<n;i++) cast[i] = map[s][i];//把第s行复制到cast数组
-    for(i = 0;i<n;i++)
+    for(int i = 0;i<n;i++) cast[i] = map[s][i];//把第s行复制到cast数组
+    for(int i = 0;i<n;i++)
     {
         min = inf;//初始化比较元素为无穷大
-        for(j = 0;j<n;j++)
+        for(int j = 0;j<n;j++)
         {
             if(cast[j]<min && !vis[j])
             {
@@ -180,7 +180,7 @@ void Dijkstra(int s,int e)
             }
         }
         vis[pos] = 1;//从cast数组中挑选出未访问过，而且距起点最近的点，标记为已访问
-        for(j = 0;j<n;j++)
+        for(int j = 0;j<n;j++)
         {
             if(cast[pos]+map[pos][j]<cast[j] && !vis[j]) cast[j] = cast[pos]+map[pos][j];//以该点为中心，向外辐射，判断是否以该点为中转的路径更短
 																																//与Floyd算法类似，也是以某点为中转，比较两条路径。
