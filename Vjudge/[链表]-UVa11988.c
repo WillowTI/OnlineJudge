@@ -9,49 +9,32 @@ BeijuThis_is_a__text
 Happy_Birthday_to_Tsinghua_University
 
 
-
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
 
-const int maxn=100000+5;
-int last;
-int cur;
-int next[100005]={0};
-char s[100005]={0};
-
-
-
 int main()
 {
-    while (scanf("%s",s+1)==1)
+    char s[100005]={0};
+    while (scanf("%s",s+1)!=EOF)
     {
-        int n=strlen(s+1);
-        last=cur=0;
-        next[0]=0;
-        for (int i=1;i<=n;i++)
+        int next[100005]={0};
+        int last=0;
+        int cur=0;//cur更像是prev的感觉
+        int length=strlen(s+1);
+        for (int i=1;i<=length;i++)
         {
             char ch=s[i];
-            if (ch=='[')
-            {
-                cur=0;
-            }
-            else if (ch==']')
-            {
-                cur=last;
-            }
+            if (ch=='[') cur=0;
+            else if (ch==']') cur=last;
             else
             {
-                next[i]=next[cur];
-                next[cur]=i;
-                if (cur==last)
-                {
-                    last=i;
-                }
-                cur=i;
+                next[i]=next[cur];//把cur元素往后移
+                next[cur]=i;//让上一个节点指向i
+                if (last==cur) last=i;
+                cur=i;//移动光标
             }
         }
         for (int i=next[0];i!=0;i=next[i])
@@ -61,6 +44,8 @@ int main()
         printf("\n");
     }
 
-
     return 0;
 }
+//紫书上的例题，看代码看了半天觉得好神奇，我大概自己是写不出来了，背模板吧
+//用Java的LinkedList做了一遍，超时，很遗憾。看不起Java咯（微笑脸
+//要是C++有自带链表之类的高级数据结构我还是很乐意学C++的
