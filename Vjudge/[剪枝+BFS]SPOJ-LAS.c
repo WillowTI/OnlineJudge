@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 //http://blog.csdn.net/llzhh/article/details/70677178
+
 using namespace std;
 char G[205][205];
 int d[4][2] = {-1,0, 0,1, 1,0, 0,-1};
