@@ -47,19 +47,19 @@ int main()
         int flag = 0;
         for (int i = 1 ; i < area ; i++)
         {
-            for (int j = 1 ; j< area ; j++)
+            for (int j = 1 ; j < area ; j++)
             {
-                int maxsize=(area - i) < (area - j) ? (area - i) : (area - j);//计算最大理论长度
-                int squarenumbers=calculate(i , j , maxsize);
+                int maxsize = (area - i) < (area - j) ? (area - i) : (area - j);//计算最大理论长度
+                int squarenumbers = calculate(i , j , maxsize);
                 if (squarenumbers) flag = 1;
             }
         }
         if (first > 1) printf("\n**********************************\n\n");
-        printf("Problem #%d\n\n",first++);
+        printf("Problem #%d\n\n" , first++);
         if (flag)
         {
             for (int i = 1 ; i <= area ; i++)
-                if (ans[i]) printf("%d square (s) of size %d\n",ans[i],i);
+                if (ans[i]) printf("%d square (s) of size %d\n" , ans[i],i);
         }
         else puts("No completed squares can be found.");//没有一个正方形时输出这句话
     }
@@ -79,7 +79,7 @@ int calculate(int x , int y , int maxsize)
         {
             if (square[x+i][y+j].horizonal == 0)
             {
-                flag1=0;
+                flag1 = 0;
                 break;
             }
         }
@@ -88,14 +88,14 @@ int calculate(int x , int y , int maxsize)
             for (int j = 0 ; j < i ; j++)
                 if (square[x+j][y+i].vertical == 0)
                 {
-                    flag2=0;
+                    flag2 = 0;
                     break;
                 }
         }
         if (flag1 && flag2)
         {
             ans[i]++;
-            ret=1;
+            ret = 1;
         }
     }
     return ret;
