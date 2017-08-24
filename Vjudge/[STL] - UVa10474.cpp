@@ -1,15 +1,15 @@
-ÌâÒâ£º
-¸ø¶¨n¸öÊýºÍq¸ö²éÑ¯
-²éÕÒÕâ¸öÊý×ÖÊÇ·ñ³öÏÖÔÚn¸öÊý×ÖÖÐ
-³öÏÖÁËÊä³öÆä´ÓÐ¡µ½´óÅÅÐòºóµÄÎ»ÖÃ
-·ñÔòÊä³öÃ»ÕÒµ½
-·ÖÎö£º
-sortÅÅÐò
-lower_bound²éÕÒ
-lower_bound·µ»Ø´óÓÚµÈÓÚvalµÄÒ»¸öÖµµÄµü´úÆ÷
-Èç¹ûÒª·µ»ØÏÂ±êµÄ»°ÐèÒª¼õÈ¥Êý×éµÄÆðÊ¼Î»ÖÃ
-Ã»ÕÒµ½µÄ»°·µ»Ø0»òÊý×é×î´óÏÂ±ê
-Ê¹ÓÃlower_bound±ØÐëÖØÐ´Ð¡ÓÚÔËËã·û
+é¢˜æ„ï¼š
+ç»™å®šnä¸ªæ•°å’Œqä¸ªæŸ¥è¯¢
+æŸ¥æ‰¾è¿™ä¸ªæ•°å­—æ˜¯å¦å‡ºçŽ°åœ¨nä¸ªæ•°å­—ä¸­
+å‡ºçŽ°äº†è¾“å‡ºå…¶ä»Žå°åˆ°å¤§æŽ’åºåŽçš„ä½ç½®
+å¦åˆ™è¾“å‡ºæ²¡æ‰¾åˆ°
+åˆ†æžï¼š
+sortæŽ’åº
+lower_boundæŸ¥æ‰¾
+lower_boundè¿”å›žå¤§äºŽç­‰äºŽvalçš„ä¸€ä¸ªå€¼çš„è¿­ä»£å™¨
+å¦‚æžœè¦è¿”å›žä¸‹æ ‡çš„è¯éœ€è¦å‡åŽ»æ•°ç»„çš„èµ·å§‹ä½ç½®
+æ²¡æ‰¾åˆ°çš„è¯è¿”å›ž0æˆ–æ•°ç»„å¤§å°
+ä½¿ç”¨lower_boundå¿…é¡»é‡å†™å°äºŽè¿ç®—ç¬¦
 
 #include <cstdio>
 #include <algorithm>
