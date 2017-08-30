@@ -1,4 +1,4 @@
-题意：
+﻿题意：
 把输入文本的单词提取出来
 添加到词典里
 按字典序输出
@@ -18,6 +18,7 @@ public class Main {
 		//File f = new File("in.txt");
 		Scanner in = new Scanner(System.in);
 		TreeSet<String> set = new TreeSet<>();
+		//HashSet不支持排序
 		//TreeSet支持排序，String已经实现了Comparator
 		//如果要按照其他的排序准则，在构造函数里传一个实现了compareTo函数的Comparable
 		while (in.hasNext())
