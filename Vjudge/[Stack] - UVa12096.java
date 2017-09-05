@@ -1,4 +1,4 @@
-题意：
+﻿题意：
 模拟栈操作
 PUSH：空集入栈
 DUP：复制栈顶元素并入栈
@@ -48,6 +48,7 @@ public class Main {
 				{
 					HashSet<Integer> x1 = (HashSet<Integer>)(Setcache.get(s.pop())).clone();
 					HashSet<Integer> x2 = (HashSet<Integer>)(Setcache.get(s.pop())).clone();
+					//注意此处必须复制一份副本，否则对元素的改变也会对map的key做出改变，原因见ID方法
 					HashSet<Integer> x = new HashSet<>();
 					ID(x1);
 					ID(x2);
@@ -80,7 +81,7 @@ public class Main {
 			return IDcache.get(x);
 		Setcache.add(x);
 		int ret = Setcache.size() - 1;
-		IDcache.put(x, ret);
+		IDcache.put(x, ret);//此处的key和LinkedList中的参数都是方法接收到的参数，所以在main函数里对参数的改变也会影响到这两处
 		return ret;
 	}
 }
