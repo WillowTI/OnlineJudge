@@ -20,7 +20,7 @@ public class Main {
 				}
 				if (b == list.get(i).get(j))
 					//这里是一个坑点，因为a有可能是等于b的，所以a判断完后b也要判断
-					//一开始是else if ...就错了
+					//一开始写的是else if ...就错了
 				{
 					bi = i;
 					bj = j;
