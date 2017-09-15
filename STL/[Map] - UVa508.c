@@ -110,5 +110,3 @@ int char2morse(char ch)
         if (alphabet[i] == ch)
             return i;
 }
-
-PS:这是C语言版本，明天打算用C++的Map和Java的HashMap试试看
