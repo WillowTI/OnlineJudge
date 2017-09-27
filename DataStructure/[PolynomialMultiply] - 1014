@@ -79,7 +79,7 @@ int main() {
         }
         int ans[105] = {0};
         int loc = 0;
-        for (int i = 104; i >= 0; i--)//然后指数从大到小往前遍历，添加进数组里
+        for (int i = 104; i >= 0; i--)//然后指数从大到小往前遍历，添加进最终的答案数组
             if (value[i])
                 ans[loc++] = value[i];
         for (int i = 0; i < loc; i++)//输出
