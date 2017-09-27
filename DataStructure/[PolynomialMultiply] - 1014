@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//多项式的处理细节较多，要提取出系数和指数，还要考虑到多种边界情况
+int poly1[55], poly2[55];//存放读进来的两个多项式，下标为指数，值为系数
+int value[105];//存放乘法后的结果
+int main() {
+    //freopen("in.txt", "r", stdin);
+    char s1[105];
+    char s2[105];
+    while (scanf("%s%s", s1, s2) == 2) {
+        memset(poly1, 0, sizeof(poly1));
+        memset(poly2, 0, sizeof(poly2));
+        memset(value, 0, sizeof(value));
+        for (int i = 0; i < strlen(s1); ) {//先处理多项式1
+            int pos = 0;
+            char tmp[105] = {0};
+            while (i < strlen(s1) && s1[i] != 'x')//处理系数
+                tmp[pos++] = s1[i++];
+            int v;
+            int coef;
+            if (strlen(tmp) == 0)//如果系数的长度为0，那值为1，这是出现在首项的时候
+                v = 1;
+            else if (strlen(tmp) == 1 && (tmp[0] == '+' || tmp[0] == '-'))//当在中间项时，那就是只有+或者-
+                v = tmp[0] == '+' ? 1 : -1;
+            else//对于其他的情况，除了正负号外一定还有其他的有效数字
+                sscanf(tmp, "%d", &v);
+            i++;//i指向x后面的元素
+            memset(tmp, 0, sizeof(tmp));//然后处理指数
+            if (i < strlen(s1) && (s1[i] == '+' || s1[i] == '-'))//当已经读取到后一个多项式的数据时，说明指数为省略的1
+                coef = 1;
+            else if (i >= strlen(s1))//如果不含x，那i已经指向多项式长度外时，指数为0
+                coef = 0;
+            else {
+                i++;
+                pos = 0;
+                while (i < strlen(s1) && s1[i] != '+' && s1[i] != '-')//否则一定存在有效的指数
+                    tmp[pos++] = s1[i++];
+                sscanf(tmp, "%d", &coef);
+            }
+            poly1[coef] = v;
+        }
+        for (int i = 0; i < strlen(s2); ) {//处理多项式2时同理
+            int pos = 0;
+            char tmp[105] = {0};
+            while (i < strlen(s2) && s2[i] != 'x')
+                tmp[pos++] = s2[i++];
+            int v;
+            int coef;
+            if (strlen(tmp) == 0)
+                v = 1;
+            else if (strlen(tmp) == 1 && (tmp[0] == '+' || tmp[0] == '-'))
+                v = tmp[0] == '+' ? 1 : -1;
+            else
+                sscanf(tmp, "%d", &v);
+            i++;
+            memset(tmp, 0, sizeof(tmp));
+            if (i < strlen(s2) && (s2[i] == '+' || s2[i] == '-'))
+                coef = 1;
+            else if (i >= strlen(s2))
+                coef = 0;
+            else {
+                i++;
+                pos = 0;
+                while (i < strlen(s2) && s2[i] != '+' && s2[i] != '-')
+                    tmp[pos++] = s2[i++];
+                sscanf(tmp, "%d", &coef);
+            }
+            poly2[coef] = v;
+        }
+        for (int i = 0; i < 55; i++) {//把初步的结果存到数组里
+            if (poly1[i]) {
+                for (int j = 0; j < 55; j++) {
+                    if (poly2[j]) {
+                        value[i + j] += (poly1[i] * poly2[j]);
+                    }
+                }
+            }
+        }
+        int ans[105] = {0};
+        int loc = 0;
+        for (int i = 104; i >= 0; i--)//然后指数从大到小往前遍历，添加进数组里
+            if (value[i])
+                ans[loc++] = value[i];
+        for (int i = 0; i < loc; i++)//输出
+            printf("%d%c", ans[i], i == loc - 1 ? '\n' : ' ');
+    }
+}
