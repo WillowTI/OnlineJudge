@@ -1,4 +1,4 @@
-//题意：
+﻿//题意：
 //给定n条指令
 //指令分3种
 //1.BUY size price（想以price的代价买到size个东西）
@@ -91,14 +91,14 @@ public class Main {
 					int index = in.nextInt() - 1;
 					if (index >= 0 && index < order.size()) {
 						order.add(new Order(0, 0, 2, t));
-						if (order.get(index).type == 0 && order.get(index).size != 0) {
-							buy.get(order.get(index).price).remove(order.get(index).id);
+						if (order.get(index).type == 0 && order.get(index).size != 0) {//如果不加后半句限制条件可能会有NullPointExceptioon
+							buy.get(order.get(index).price).remove(order.get(index).id);//首先从set中移除id
 							if (buy.get(order.get(index).price).isEmpty()) 
-								buy.remove(order.get(index).price);
-							buy_whole.put(order.get(index).price, buy_whole.get(order.get(index).price) - order.get(index).size);
-							if (buy_whole.get(order.get(index).price) == 0) 
+								buy.remove(order.get(index).price);//如果删完后set为空，那就把这个set删掉
+							buy_whole.put(order.get(index).price, buy_whole.get(order.get(index).price) - order.get(index).size);//这个price下的size减掉被取消订单的size
+							if (buy_whole.get(order.get(index).price) == 0) //如果删完后size为0就把这对K-V删掉
 								buy_whole.remove(order.get(index).price);
-						} else if (order.get(index).type == 1 && order.get(index).size != 0) {
+						} else if (order.get(index).type == 1 && order.get(index).size != 0) {//对于SELL的指令同理
 							sell.get(order.get(index).price).remove(order.get(index).id);
 							if (sell.get(order.get(index).price).isEmpty()) 
 								sell.remove(order.get(index).price);
@@ -130,10 +130,10 @@ public class Main {
 		System.out.println();
 	}
 	public static void trade(boolean flag) {
-		while (!buy.isEmpty() && !sell.isEmpty()) {
+		while (!buy.isEmpty() && !sell.isEmpty()) {//由于这里和CANCEL操作直接把为空/为0的V删除了，所以只要判断是否为空就知道能不能做
 			int price1 = buy.descendingMap().firstKey();
 			int price2 = sell.firstKey();
-			if (price1 >= price2) {
+			if (price1 >= price2) {//只要能匹配到就做
 				int id1 = buy.get(price1).first();
 				int id2 = sell.get(price2).first();
 				int size = Math.min(order.get(id1).size, order.get(id2).size);
@@ -142,7 +142,7 @@ public class Main {
 				buy_whole.put(price1, buy_whole.get(price1) - size);
 				sell_whole.put(price2, sell_whole.get(price2) - size);
 				System.out.println("TRADE " + size + " " + (flag ? price1 : price2));
-				if (order.get(id1).size == 0) buy.get(price1).remove(id1);
+				if (order.get(id1).size == 0) buy.get(price1).remove(id1);//和CANCEL的操作类似
 				if (order.get(id2).size == 0) sell.get(price2).remove(id2);
 				if (buy_whole.get(price1) == 0) buy_whole.remove(price1);
 				if (sell_whole.get(price2) == 0) sell_whole.remove(price2);
@@ -156,7 +156,7 @@ public class Main {
 }
 
 class Order {
-	int type, size, price, id;
+	int type, size, price, id;//type代表操作的类型，0为BUY，1为SELL，2为CANCEL
 	public Order(int s, int p, int t, int i) {
 		size = s;
 		price = p;
