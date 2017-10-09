@@ -1,14 +1,14 @@
-Ïß¶ÎÊ÷Ä£°åÌâ
-Ö§³Ö½¨Ê÷¡¢²éÑ¯Çø¼ä×î´óÖµ¡¢¸üĞÂÊı¾İ
+çº¿æ®µæ ‘æ¨¡æ¿é¢˜
+æ”¯æŒå»ºæ ‘ã€æŸ¥è¯¢åŒºé—´æœ€å¤§å€¼ã€æ›´æ–°æ•°æ®
 
-ÌâÒâ£º
-¸ø¶¨n¸öÊıºÍm¸ö²Ù×÷
-Q´ú±í²éÑ¯Çø¼ä×î´óÖµ
-N´ú±í¸üĞÂÊı¾İ
+é¢˜æ„ï¼š
+ç»™å®šnä¸ªæ•°å’Œmä¸ªæ“ä½œ
+Qä»£è¡¨æŸ¥è¯¢åŒºé—´æœ€å¤§å€¼
+Nä»£è¡¨æ›´æ–°æ•°æ®
 
-·ÖÎö£º
-Ã¿´Î±éÀúÇø¼ä¿Ï¶¨ÊÇ²»ĞĞµÄ
-ÓÃÏß¶ÎÊ÷½µµÍÊ±¼ä¸´ÔÓ¶È
+åˆ†æï¼š
+æ¯æ¬¡éå†åŒºé—´è‚¯å®šæ˜¯ä¸è¡Œçš„
+ç”¨çº¿æ®µæ ‘é™ä½æ—¶é—´å¤æ‚åº¦
 
 #include <cstdio>
 #include <cstring>
@@ -16,6 +16,7 @@ N´ú±í¸üĞÂÊı¾İ
 #define maxn 200005
 
 using namespace std;
+
 struct N
 {
     int l, r, m;
@@ -25,7 +26,7 @@ int num[maxn];
 
 int query(int node, int ql, int qr);
 void build(int node, int l, int r);
-void update_tree(int root,int l ,int r , int pos , int v);
+void update_tree(int root, int l, int r, int pos, int v);
 
 int main()
 {
@@ -49,6 +50,21 @@ int main()
     }
 }
 
+int query(int node, int ql, int qr)
+{
+    int l = tree[node].l;
+    int r = tree[node].r;
+    if(l == ql && r == qr)
+        return tree[node].m;
+    int mid = (l + r) / 2;
+    if(qr <= mid)
+        return query(node * 2, ql, qr);
+    else if(ql > mid)
+        return query((node * 2) + 1, ql, qr);
+    else
+        return max(query(node * 2, ql, mid), query((node * 2) + 1, mid + 1, qr));
+}
+
 void build(int node, int l, int r)
 {
     tree[node].l = l;
@@ -66,32 +82,16 @@ void build(int node, int l, int r)
     return ;
 }
 
-int query(int node, int ql, int qr)
+void update_tree(int root, int l, int r, int pos, int v)
 {
-    int l = tree[node].l;
-    int r = tree[node].r;
-    if(l == ql && r == qr)
-        return tree[node].m;
-    int mid = (l + r) / 2;
-    if(qr <= mid)
-        return query(node << 1, ql, qr);
-    else if(ql > mid)
-        return query((node << 1) + 1, ql, qr);
-    else
-        return max(query(node << 1, ql, mid), query((node << 1) + 1, mid + 1, qr));
-}
-
-void update_tree(int root,int l ,int r , int pos , int v)
-{
-    if (l==r)
+    if (l == r)
         tree[root].m = v;
-    else
-    {
-        int mid = (l+r) / 2;
+    else {
+        int mid = (l + r) / 2;
         if (pos <= mid)
-            update_tree(root*2,l,mid,pos,v);
+            update_tree(root * 2, l, mid, pos, v);
         else
-            update_tree(root*2+1,mid+1,r,pos,v);
-        tree[root].m = max(tree[root*2].m, tree[root*2+1].m);
+            update_tree(root * 2 + 1, mid + 1, r, pos, v);
+        tree[root].m = max(tree[root * 2].m, tree[root * 2 + 1].m);
     }
 }
