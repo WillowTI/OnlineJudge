@@ -11,7 +11,6 @@ N代表更新数据
 #define maxn 200005
 
 using namespace std;
-
 struct N
 {
     int l, r, m;
@@ -21,7 +20,7 @@ int num[maxn];
 
 int query(int node, int ql, int qr);
 void build(int node, int l, int r);
-void update_tree(int node, int l, int r, int pos, int v);
+void update_tree(int root,int l ,int r , int pos , int v);
 
 int main()
 {
@@ -45,21 +44,6 @@ int main()
     }
 }
 
-int query(int node, int ql, int qr)
-{
-    int l = tree[node].l;
-    int r = tree[node].r;
-    if(l == ql && r == qr)
-        return tree[node].m;
-    int mid = (l + r) / 2;
-    if(qr <= mid)
-        return query(node * 2, ql, qr);
-    else if(ql > mid)
-        return query(node * 2 + 1, ql, qr);
-    else
-        return max(query(node * 2, ql, mid), query(node * 2 + 1, mid + 1, qr));
-}
-
 void build(int node, int l, int r)
 {
     tree[node].l = l;
@@ -69,23 +53,40 @@ void build(int node, int l, int r)
         scanf("%d", &tree[node].m);
         return ;
     }
+
     int mid = (l + r) / 2;
     build(node * 2, l, mid);
     build(node * 2 + 1, mid + 1, r);
-    tree[node].m = max(tree[node * 2].m, tree[node * 2 + 1].m);
+    tree[node].m = max(tree[node << 1].m, tree[(node << 1) + 1].m);
     return ;
 }
 
-void update_tree(int node, int l, int r, int pos, int v)
+int query(int node, int ql, int qr)
 {
-    if (l == r)
-        tree[node].m = v;
-    else {
-        int mid = (l + r) / 2;
+    int l = tree[node].l;
+    int r = tree[node].r;
+    if(l == ql && r == qr)
+        return tree[node].m;
+    int mid = (l + r) / 2;
+    if(qr <= mid)
+        return query(node << 1, ql, qr);
+    else if(ql > mid)
+        return query((node << 1) + 1, ql, qr);
+    else
+        return max(query(node << 1, ql, mid), query((node << 1) + 1, mid + 1, qr));
+}
+
+void update_tree(int root,int l ,int r , int pos , int v)
+{
+    if (l==r)
+        tree[root].m = v;
+    else
+    {
+        int mid = (l+r) / 2;
         if (pos <= mid)
-            update_tree(node * 2, l, mid, pos, v);
+            update_tree(root*2,l,mid,pos,v);
         else
-            update_tree(node * 2 + 1, mid + 1, r, pos, v);
-        tree[node].m = max(tree[node * 2].m, tree[node * 2 + 1].m);
+            update_tree(root*2+1,mid+1,r,pos,v);
+        tree[root].m = max(tree[root*2].m, tree[root*2+1].m);
     }
 }
