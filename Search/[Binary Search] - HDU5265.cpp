@@ -45,7 +45,7 @@ int main()
                     r--;//否则和太大了，右端点向左移
             }
         }
-        printf("%I64d\n" , MAX);
+        printf("%lld\n" , MAX);
     }
     return 0;
 }
