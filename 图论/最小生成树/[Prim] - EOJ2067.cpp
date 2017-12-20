@@ -55,7 +55,7 @@ double prim() {//由于数据规模不大，可以用O(n^2)的方法遍历。可
         for (int j = 1; j < n; j++) {
             if (graph[minid][j] < lowcost[j]) {//松弛操作，更新起点
                 lowcost[j] = graph[minid][j];
-                mst[j] = minid;
+                mst[j] = minid;//这一步其实可以省去，只要记录是否访问过就行了
             }
         }
     }
