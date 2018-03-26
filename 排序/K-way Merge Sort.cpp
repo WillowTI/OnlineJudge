@@ -27,8 +27,6 @@ struct Node {
 void MergeSort(int l, int r, int k);
 void Merge(int l, int r, int k);
 int main() {
-//    freopen("F:\\TestCode\\TestCLion\\in.txt", "r", stdin);
-//    freopen("F:\\TestCode\\TestCLion\\out.txt", "w", stdout);
     int n;
     scanf("%d", &n);
     for (int i = 0; i < n; i++)
